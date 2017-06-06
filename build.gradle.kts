@@ -3,8 +3,13 @@ import groovy.lang.GroovyObject
 import org.jfrog.gradle.plugin.artifactory.dsl.PublisherConfig
 import org.jfrog.gradle.plugin.artifactory.dsl.ResolverConfig
 import org.jfrog.gradle.plugin.artifactory.task.ArtifactoryTask
-
-
+import org.gradle.api.tasks.SourceSet
+import org.gradle.api.file.SourceDirectorySet
+import org.gradle.api.internal.HasConvention
+import org.gradle.api.tasks.SourceSet
+import org.gradle.api.tasks.SourceSetContainer
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val kotlinVersion = "1.1.2-2"
 val jacksonVersion = "2.8.7"
 val shadowVersion = "2.0.0"
@@ -12,6 +17,10 @@ val junitVersion = "4.11"
 
 
 buildscript {
+    val kotlinVersion = "1.1.2-2"
+    val jacksonVersion = "2.8.7"
+    val shadowVersion = "2.0.0"
+    val junitVersion = "4.11"
 
     repositories {
         maven { url = uri("https://jitpack.io") }
@@ -27,6 +36,11 @@ buildscript {
 }
 
 dependencies {
+    val kotlinVersion = "1.1.2-2"
+    val jacksonVersion = "2.8.7"
+    val shadowVersion = "2.0.0"
+    val junitVersion = "4.11"
+
     compile(group = "com.fasterxml.jackson.core", name = "jackson-databind", version = jacksonVersion)
     compile(group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version = jacksonVersion)
     compile(group = "com.fasterxml.jackson.dataformat", name = "jackson-dataformat-yaml", version = jacksonVersion)
@@ -43,6 +57,8 @@ repositories {
     mavenCentral()
     jcenter()
 }
+
+
 
 apply {
     plugin("kotlin")
@@ -61,4 +77,18 @@ plugins {
 allprojects {
     group = "lostfilm"
     version = "0.0.1-SNAPSHOT"
+}
+val sourceSets = java.sourceSets
+
+sourceSets {
+    main {
+        java.sourceDirs = files("src")
+        kotlin.sourceDirs = files("src")
+        resources.sourceDirs = files("src/res")
+    }
+    test {
+        java.sourceDirs = files("test")
+        kotlin.sourceDirs = files("test")
+        resources.sourceDirs = files("test/res")
+    }
 }
