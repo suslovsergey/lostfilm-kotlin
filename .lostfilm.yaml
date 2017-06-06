@@ -1,0 +1,5 @@
+login: SOME_LOGIN
+password: SOME_PASSWORD
+serials:
+  - Lethal_Weapon
+outputPath: SOME_OUTPUT_PATH
