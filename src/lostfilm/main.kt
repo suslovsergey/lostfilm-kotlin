@@ -102,5 +102,4 @@ private fun work(forced: Forced? = null) {
         println("No new series!!!")
 
     DB.client.close()
-    System.exit(0)
 }
